@@ -34,7 +34,7 @@
     }
 }
 
-- (void)pushLocalNotificationWithBadge:(NSInteger)badge sound:(nullable NSString *)sound title:(NSString *)title message:(NSString *)message params:(NSDictionary *)params fireDate:(NSDate *)fireDate repeatInterval:(NSCalendarUnit)repeatInterval {
+- (void)pushLocalNotificationWithBadge:(NSInteger)badge sound:(nullable NSString *)sound title:(NSString *)title message:(NSString *)message params:(NSDictionary *)params fireDate:(nullable NSDate *)fireDate repeatInterval:(NSCalendarUnit)repeatInterval identifier:(nonnull NSString *)identifier {
     UILocalNotification *notification = [[UILocalNotification alloc] init];
     if (@available(iOS 8.2, *)) {
         notification.alertTitle = title;
@@ -45,7 +45,11 @@
     } else {
         notification.soundName = UILocalNotificationDefaultSoundName;
     }
-    notification.userInfo = params;
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:params];
+    if (identifier) {
+        [dic setValue:identifier forKey:@"MZNotification_identifier"];
+    }
+    notification.userInfo = dic;
     notification.applicationIconBadgeNumber = badge;
     notification.repeatInterval = repeatInterval;
     if (fireDate) {
@@ -56,7 +60,7 @@
     }
 }
 
-- (void)pushLocalNotificationWithBadge:(NSInteger)badge sound:(nullable NSString *)sound title:(NSString *)title message:(NSString *)message params:(NSDictionary *)params trigger:(nullable UNNotificationTrigger *)trigger API_AVAILABLE(ios(10.0)) {
+- (void)pushLocalNotificationWithBadge:(NSInteger)badge sound:(nullable NSString *)sound title:(NSString *)title message:(NSString *)message params:(NSDictionary *)params trigger:(nullable UNNotificationTrigger *)trigger identifier:(nonnull NSString *)identifier  API_AVAILABLE(ios(10.0)) {
     UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
     UNMutableNotificationContent* content = [[UNMutableNotificationContent alloc] init];
     content.title = title;
@@ -68,11 +72,56 @@
     }
     content.userInfo = params;
     content.badge = [NSNumber numberWithInteger:badge];
-    UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:@"MZNotification"
+    UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:identifier
                                                                           content:content trigger:trigger];
     [center addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
         
     }];
+}
+
+- (void)updateLocalNotificationWithBadge:(NSInteger)badge sound:(NSString *)sound title:(NSString *)title message:(NSString *)message params:(NSDictionary *)params fireDate:(NSDate *)fireDate repeatInterval:(NSCalendarUnit)repeatInterval identifier:(nonnull NSString *)identifier {
+    NSArray *localNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
+    for (UILocalNotification *notification in localNotifications) {
+        NSDictionary *info = notification.userInfo;
+        if (info) {
+            NSString *currentIdentifier = [info valueForKey:@"MZNotification_identifier"];
+            if ([identifier isEqualToString:currentIdentifier]) {
+                [[UIApplication sharedApplication] cancelLocalNotification:notification];
+                break;
+            }
+        }
+    }
+    [self pushLocalNotificationWithBadge:badge sound:sound title:title message:message params:params fireDate:fireDate repeatInterval:repeatInterval identifier:identifier];
+}
+
+- (void)updateLocalNotificationWithBadge:(NSInteger)badge sound:(NSString *)sound title:(NSString *)title message:(NSString *)message params:(NSDictionary *)params trigger:(UNNotificationTrigger *)trigger identifier:(NSString *)identifier {
+    [self pushLocalNotificationWithBadge:badge sound:sound title:title message:message params:params trigger:trigger identifier:identifier];
+}
+
+- (void)cancelLocalNotificationWithIdentifier:(nonnull NSString *)identifier {
+    if (@available(iOS 10.0, *)) {
+        [[UNUserNotificationCenter currentNotificationCenter] removePendingNotificationRequestsWithIdentifiers:@[identifier]];
+    } else {
+        NSArray *localNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
+        for (UILocalNotification *notification in localNotifications) {
+            NSDictionary *info = notification.userInfo;
+            if (info) {
+                NSString *currentIdentifier = [info valueForKey:@"MZNotification_identifier"];
+                if ([identifier isEqualToString:currentIdentifier]) {
+                    [[UIApplication sharedApplication] cancelLocalNotification:notification];
+                    break;
+                }
+            }
+        }
+    }
+}
+
+- (void)cancelAllLocalNotification {
+    if (@available(iOS 10.0, *)) {
+        [[UNUserNotificationCenter currentNotificationCenter] removeAllPendingNotificationRequests];
+    } else {
+        [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    }
 }
 
 #pragma mark -UNUserNotificationCenterDelegate

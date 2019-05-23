@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6ABD00CE22963A8600F506D7 /* AppDelegate+MZNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABD00CD22963A8600F506D7 /* AppDelegate+MZNotification.m */; };
+		6ABD00D0229690E200F506D7 /* notification.caf in Resources */ = {isa = PBXBuildFile; fileRef = 6ABD00CF229690E200F506D7 /* notification.caf */; };
 		6AF0CB8022941C15002556D5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF0CB7F22941C15002556D5 /* AppDelegate.m */; };
 		6AF0CB8322941C15002556D5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF0CB8222941C15002556D5 /* ViewController.m */; };
 		6AF0CB8622941C15002556D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AF0CB8422941C15002556D5 /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 /* Begin PBXFileReference section */
 		6ABD00CC22963A8600F506D7 /* AppDelegate+MZNotification.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+MZNotification.h"; sourceTree = "<group>"; };
 		6ABD00CD22963A8600F506D7 /* AppDelegate+MZNotification.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+MZNotification.m"; sourceTree = "<group>"; };
+		6ABD00CF229690E200F506D7 /* notification.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = notification.caf; sourceTree = "<group>"; };
 		6AF0CB7B22941C15002556D5 /* MZNotification.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MZNotification.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AF0CB7E22941C15002556D5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6AF0CB7F22941C15002556D5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 		6AF0CB7D22941C15002556D5 /* MZNotification */ = {
 			isa = PBXGroup;
 			children = (
+				6ABD00CF229690E200F506D7 /* notification.caf */,
 				6AF0CB7E22941C15002556D5 /* AppDelegate.h */,
 				6AF0CB7F22941C15002556D5 /* AppDelegate.m */,
 				6AF0CB8122941C15002556D5 /* ViewController.h */,
@@ -148,6 +151,7 @@
 			files = (
 				6AF0CB8B22941C16002556D5 /* LaunchScreen.storyboard in Resources */,
 				6AF0CB8822941C16002556D5 /* Assets.xcassets in Resources */,
+				6ABD00D0229690E200F506D7 /* notification.caf in Resources */,
 				6AF0CB8622941C15002556D5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

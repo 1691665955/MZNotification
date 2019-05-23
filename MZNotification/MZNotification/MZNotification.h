@@ -62,8 +62,9 @@ NS_ASSUME_NONNULL_BEGIN
  @param params 推送额外附带数据，会在推送数据回调代理中获取到
  @param fireDate 触发时间（nil代表立即触发）
  @param repeatInterval 重复时间间隔，0代表不重复
+ @param identifier 通知标志符，可用来更新和删除本地通知
  */
-- (void)pushLocalNotificationWithBadge:(NSInteger)badge sound:(nullable NSString *)sound title:(NSString *)title message:(NSString *)message params:(NSDictionary *)params fireDate:(NSDate *)fireDate repeatInterval:(NSCalendarUnit)repeatInterval;
+- (void)pushLocalNotificationWithBadge:(NSInteger)badge sound:(nullable NSString *)sound title:(NSString *)title message:(NSString *)message params:(NSDictionary *)params fireDate:(nullable NSDate *)fireDate repeatInterval:(NSCalendarUnit)repeatInterval identifier:(nonnull NSString *)identifier;
 
 /**
  iOS10之后发送本地推送
@@ -74,8 +75,48 @@ NS_ASSUME_NONNULL_BEGIN
  @param message 推送内容
  @param params 推送额外附带数据，会在推送数据回调代理中获取到
  @param trigger 推送触发器
+ @param identifier 通知标志符，可用来更新和删除本地通知
  */
-- (void)pushLocalNotificationWithBadge:(NSInteger)badge sound:(nullable NSString *)sound title:(NSString *)title message:(NSString *)message params:(NSDictionary *)params trigger:(nullable UNNotificationTrigger *)trigger API_AVAILABLE(ios(10.0));
+- (void)pushLocalNotificationWithBadge:(NSInteger)badge sound:(nullable NSString *)sound title:(NSString *)title message:(NSString *)message params:(NSDictionary *)params trigger:(nullable UNNotificationTrigger *)trigger identifier:(nonnull NSString *)identifier API_AVAILABLE(ios(10.0));
+
+/**
+ iOS8-iOS10更新本地推送(相同identifier的推送会替换)
+
+ @param badge 角标
+ @param sound 推送声音（nil代表系统默认声音，可填写自定义推送声音名称）
+ @param title 推送标题
+ @param message 推送内容
+ @param params 推送额外附带数据，会在推送数据回调代理中获取到
+ @param fireDate 触发时间（nil代表立即触发）
+ @param repeatInterval 重复时间间隔，0代表不重复
+ @param identifier 通知标志符，可用来更新和删除本地通知
+ */
+- (void)updateLocalNotificationWithBadge:(NSInteger)badge sound:(nullable NSString *)sound title:(NSString *)title message:(NSString *)message params:(NSDictionary *)params fireDate:(nullable NSDate *)fireDate repeatInterval:(NSCalendarUnit)repeatInterval identifier:(nonnull NSString *)identifier;
+
+/**
+ iOS10之后更新本地推送(相同identifier的推送会替换)
+
+ @param badge 角标
+ @param sound 推送声音（nil代表系统默认声音，可填写自定义推送声音名称）
+ @param title 推送标题
+ @param message 推送内容
+ @param params 推送额外附带数据，会在推送数据回调代理中获取到
+ @param trigger 推送触发器
+ @param identifier 通知标志符，可用来更新和删除本地通知
+ */
+- (void)updateLocalNotificationWithBadge:(NSInteger)badge sound:(nullable NSString *)sound title:(NSString *)title message:(NSString *)message params:(NSDictionary *)params trigger:(nullable UNNotificationTrigger *)trigger identifier:(nonnull NSString *)identifier API_AVAILABLE(ios(10.0));
+
+/**
+ 取消指定标志符的本地推送
+
+ @param identifier 通知标志符
+ */
+- (void)cancelLocalNotificationWithIdentifier:(nonnull NSString *)identifier;
+
+/**
+ 取消所有本地推送
+ */
+- (void)cancelAllLocalNotification;
 @end
 
 NS_ASSUME_NONNULL_END

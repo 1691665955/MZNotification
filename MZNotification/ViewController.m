@@ -10,26 +10,38 @@
 #import "MZNotification/MZNotification.h"
 
 @interface ViewController ()<MZNotificationDelegate>
-
+@property (nonatomic, assign) NSInteger count;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.count = 0;
     [[MZNotification shareInstance] setDelegate:self];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
-    
-    if (@available(iOS 10.0, *)) {
-        UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:5 repeats:NO];
-        [[MZNotification shareInstance] pushLocalNotificationWithBadge:2 sound:nil title:@"测试" message:@"测试测试测试测试测试测试" params:@{@"name":@"MZ",@"age":@"25"} trigger:trigger];
-    } else {
-        NSDate *date = [NSDate dateWithTimeIntervalSinceNow:5];
-        [[MZNotification shareInstance] pushLocalNotificationWithBadge:2 sound:nil title:@"测试" message:@"测试测试测试测试测试测试" params:@{@"name":@"MZ",@"age":@"25"} fireDate:date repeatInterval:0];
+    self.count++;
+    if (self.count == 1) {
+        if (@available(iOS 10.0, *)) {
+            UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:5 repeats:NO];
+            [[MZNotification shareInstance] pushLocalNotificationWithBadge:2 sound:nil title:@"测试1" message:@"1111111111" params:@{@"tag":@"MZ11111111"} trigger:trigger identifier:@"test"];
+        } else {
+            NSDate *date = [NSDate dateWithTimeIntervalSinceNow:5];
+            [[MZNotification shareInstance] pushLocalNotificationWithBadge:2 sound:nil title:@"测试1" message:@"1111111111" params:@{@"tag":@"MZ11111111"} fireDate:date repeatInterval:0 identifier:@"test"];
+        }
+    } else if (self.count == 2) {
+        if (@available(iOS 10.0, *)) {
+            UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:5 repeats:NO];
+            [[MZNotification shareInstance] updateLocalNotificationWithBadge:2 sound:@"notification.caf" title:@"测试2" message:@"222222222222" params:@{@"tag":@"MZ22222222"} trigger:trigger identifier:@"test"];
+        } else {
+            NSDate *date = [NSDate dateWithTimeIntervalSinceNow:5];
+            [[MZNotification shareInstance] updateLocalNotificationWithBadge:2 sound:@"notification.caf" title:@"测试2" message:@"222222222222" params:@{@"tag":@"MZ22222222"} fireDate:date repeatInterval:0 identifier:@"test"];
+        }
+    } else if (self.count == 3) {
+        [[MZNotification shareInstance] cancelAllLocalNotification];
     }
 }
 
