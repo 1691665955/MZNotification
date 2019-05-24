@@ -9,19 +9,26 @@
 /* Begin PBXBuildFile section */
 		6ABD00CE22963A8600F506D7 /* AppDelegate+MZNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABD00CD22963A8600F506D7 /* AppDelegate+MZNotification.m */; };
 		6ABD00D0229690E200F506D7 /* notification.caf in Resources */ = {isa = PBXBuildFile; fileRef = 6ABD00CF229690E200F506D7 /* notification.caf */; };
+		6ABD00D32297978200F506D7 /* MZLocalNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABD00D22297978200F506D7 /* MZLocalNotification.m */; };
+		6ABD00D72297999800F506D7 /* MZRemoteNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABD00D62297999800F506D7 /* MZRemoteNotification.m */; };
 		6AF0CB8022941C15002556D5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF0CB7F22941C15002556D5 /* AppDelegate.m */; };
 		6AF0CB8322941C15002556D5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF0CB8222941C15002556D5 /* ViewController.m */; };
 		6AF0CB8622941C15002556D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AF0CB8422941C15002556D5 /* Main.storyboard */; };
 		6AF0CB8822941C16002556D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AF0CB8722941C16002556D5 /* Assets.xcassets */; };
 		6AF0CB8B22941C16002556D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AF0CB8922941C16002556D5 /* LaunchScreen.storyboard */; };
 		6AF0CB8E22941C16002556D5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF0CB8D22941C16002556D5 /* main.m */; };
-		6AF0CB9722941C7E002556D5 /* MZNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF0CB9622941C7E002556D5 /* MZNotification.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6ABD00CC22963A8600F506D7 /* AppDelegate+MZNotification.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+MZNotification.h"; sourceTree = "<group>"; };
 		6ABD00CD22963A8600F506D7 /* AppDelegate+MZNotification.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+MZNotification.m"; sourceTree = "<group>"; };
 		6ABD00CF229690E200F506D7 /* notification.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = notification.caf; sourceTree = "<group>"; };
+		6ABD00D12297978200F506D7 /* MZLocalNotification.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZLocalNotification.h; sourceTree = "<group>"; };
+		6ABD00D22297978200F506D7 /* MZLocalNotification.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZLocalNotification.m; sourceTree = "<group>"; };
+		6ABD00D4229798C800F506D7 /* MZNotification.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZNotification.h; sourceTree = "<group>"; };
+		6ABD00D52297999800F506D7 /* MZRemoteNotification.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZRemoteNotification.h; sourceTree = "<group>"; };
+		6ABD00D62297999800F506D7 /* MZRemoteNotification.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZRemoteNotification.m; sourceTree = "<group>"; };
+		6ABD00DA2297C17900F506D7 /* MZNotification.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MZNotification.entitlements; sourceTree = "<group>"; };
 		6AF0CB7B22941C15002556D5 /* MZNotification.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MZNotification.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AF0CB7E22941C15002556D5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6AF0CB7F22941C15002556D5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -32,8 +39,6 @@
 		6AF0CB8A22941C16002556D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6AF0CB8C22941C16002556D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6AF0CB8D22941C16002556D5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		6AF0CB9522941C7E002556D5 /* MZNotification.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZNotification.h; sourceTree = "<group>"; };
-		6AF0CB9622941C7E002556D5 /* MZNotification.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MZNotification.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +71,7 @@
 		6AF0CB7D22941C15002556D5 /* MZNotification */ = {
 			isa = PBXGroup;
 			children = (
+				6ABD00DA2297C17900F506D7 /* MZNotification.entitlements */,
 				6ABD00CF229690E200F506D7 /* notification.caf */,
 				6AF0CB7E22941C15002556D5 /* AppDelegate.h */,
 				6AF0CB7F22941C15002556D5 /* AppDelegate.m */,
@@ -84,8 +90,11 @@
 		6AF0CB9422941C4D002556D5 /* MZNotification */ = {
 			isa = PBXGroup;
 			children = (
-				6AF0CB9522941C7E002556D5 /* MZNotification.h */,
-				6AF0CB9622941C7E002556D5 /* MZNotification.m */,
+				6ABD00D4229798C800F506D7 /* MZNotification.h */,
+				6ABD00D12297978200F506D7 /* MZLocalNotification.h */,
+				6ABD00D22297978200F506D7 /* MZLocalNotification.m */,
+				6ABD00D52297999800F506D7 /* MZRemoteNotification.h */,
+				6ABD00D62297999800F506D7 /* MZRemoteNotification.m */,
 				6ABD00CC22963A8600F506D7 /* AppDelegate+MZNotification.h */,
 				6ABD00CD22963A8600F506D7 /* AppDelegate+MZNotification.m */,
 			);
@@ -123,6 +132,14 @@
 				TargetAttributes = {
 					6AF0CB7A22941C15002556D5 = {
 						CreatedOnToolsVersion = 10.2.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -165,9 +182,10 @@
 			files = (
 				6AF0CB8322941C15002556D5 /* ViewController.m in Sources */,
 				6ABD00CE22963A8600F506D7 /* AppDelegate+MZNotification.m in Sources */,
-				6AF0CB9722941C7E002556D5 /* MZNotification.m in Sources */,
 				6AF0CB8E22941C16002556D5 /* main.m in Sources */,
 				6AF0CB8022941C15002556D5 /* AppDelegate.m in Sources */,
+				6ABD00D32297978200F506D7 /* MZLocalNotification.m in Sources */,
+				6ABD00D72297999800F506D7 /* MZRemoteNotification.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,6 +327,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MZNotification/MZNotification.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8JD3VFVV9F;
 				INFOPLIST_FILE = MZNotification/Info.plist;
@@ -319,6 +339,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mz.MZNotification;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -327,6 +348,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MZNotification/MZNotification.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8JD3VFVV9F;
 				INFOPLIST_FILE = MZNotification/Info.plist;
@@ -337,6 +360,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mz.MZNotification;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

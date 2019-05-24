@@ -1,19 +1,19 @@
 //
-//  MZNotification.m
+//  MZLocalNotification.m
 //  MZNotification
 //
-//  Created by 曾龙 on 2019/5/21.
+//  Created by 曾龙 on 2019/5/24.
 //  Copyright © 2019 com.mz. All rights reserved.
 //
 
-#import "MZNotification.h"
+#import "MZLocalNotification.h"
 
-@implementation MZNotification
+@implementation MZLocalNotification
 + (instancetype)shareInstance {
-    static MZNotification *instance;
+    static MZLocalNotification *instance;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        instance = [[MZNotification alloc] init];
+        instance = [[MZLocalNotification alloc] init];
         instance.showNotificationWhenApplicationActice = YES;
     });
     return instance;
@@ -124,14 +124,25 @@
     }
 }
 
+- (void)setApplicationIconBadgeNumber:(NSInteger)badge {
+    if (badge < 0) {
+        badge = 0;
+    }
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:badge];
+}
+
+- (void)clearApplicationIconBadge {
+    [self setApplicationIconBadgeNumber:0];
+}
+
 #pragma mark -UNUserNotificationCenterDelegate
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler  API_AVAILABLE(ios(10.0)){
     if (self.showNotificationWhenApplicationActice) {
         completionHandler(UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionSound|UNNotificationPresentationOptionAlert);
     } else {
         NSDictionary *userInfo = notification.request.content.userInfo;
-        if (self.delegate && [self.delegate respondsToSelector:@selector(mz_didReceiveNotificationOnApplicationActiveWithUserInfo:)]) {
-            [self.delegate mz_didReceiveNotificationOnApplicationActiveWithUserInfo:userInfo];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(mz_didReceiveLocalNotificationOnApplicationActiveWithUserInfo:)]) {
+            [self.delegate mz_didReceiveLocalNotificationOnApplicationActiveWithUserInfo:userInfo];
         }
         completionHandler(0);
     }
@@ -140,12 +151,12 @@
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(nonnull UNNotificationResponse *)response withCompletionHandler:(nonnull void (^)(void))completionHandler  API_AVAILABLE(ios(10.0)){
     NSDictionary *userInfo = response.notification.request.content.userInfo;
     if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(mz_didReceiveNotificationOnApplicationActiveWithUserInfo:)]) {
-            [self.delegate mz_didReceiveNotificationOnApplicationActiveWithUserInfo:userInfo];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(mz_didReceiveLocalNotificationOnApplicationActiveWithUserInfo:)]) {
+            [self.delegate mz_didReceiveLocalNotificationOnApplicationActiveWithUserInfo:userInfo];
         }
     } else {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(mz_didReceiveNotificationOnApplicationBackgroundWithUserInfo:)]) {
-            [self.delegate mz_didReceiveNotificationOnApplicationBackgroundWithUserInfo:userInfo];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(mz_didReceiveLocalNotificationOnApplicationBackgroundWithUserInfo:)]) {
+            [self.delegate mz_didReceiveLocalNotificationOnApplicationBackgroundWithUserInfo:userInfo];
         }
     }
     completionHandler();
@@ -154,12 +165,12 @@
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     NSDictionary *userInfo = notification.userInfo;
     if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(mz_didReceiveNotificationOnApplicationActiveWithUserInfo:)]) {
-            [self.delegate mz_didReceiveNotificationOnApplicationActiveWithUserInfo:userInfo];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(mz_didReceiveLocalNotificationOnApplicationActiveWithUserInfo:)]) {
+            [self.delegate mz_didReceiveLocalNotificationOnApplicationActiveWithUserInfo:userInfo];
         }
     } else {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(mz_didReceiveNotificationOnApplicationBackgroundWithUserInfo:)]) {
-            [self.delegate mz_didReceiveNotificationOnApplicationBackgroundWithUserInfo:userInfo];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(mz_didReceiveLocalNotificationOnApplicationBackgroundWithUserInfo:)]) {
+            [self.delegate mz_didReceiveLocalNotificationOnApplicationBackgroundWithUserInfo:userInfo];
         }
     }
 }

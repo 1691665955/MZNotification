@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "MZNotification/MZNotification.h"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<MZLocalNotificationDelegate,MZRemoteNotificationDelegate>
 
 @end
 
@@ -17,9 +17,36 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [[MZNotification shareInstance] registerLocalNotification];
-    [[MZNotification shareInstance] setShowNotificationWhenApplicationActice:NO];
+    [[MZLocalNotification shareInstance] setDelegate:self];
+    [[MZRemoteNotification shareInstance] setDelegate:self];
+    [[MZLocalNotification shareInstance] setShowNotificationWhenApplicationActice:NO];
+    [[MZRemoteNotification shareInstance] setShowNotificationWhenApplicationActice:NO];
+    
+    //当本地推送和远程推送同时存在时，只需注册远程推送即可
+    [[MZRemoteNotification shareInstance] registerRemoteNotification];
     return YES;
+}
+
+#pragma mark -MZLocalNotificationDelegate
+- (void)mz_didReceiveLocalNotificationOnApplicationBackgroundWithUserInfo:(NSDictionary *)userInfo {
+    NSLog(@"localNotification_ApplicationBackgroundWithUserInfo:%@",userInfo.description);
+}
+
+- (void)mz_didReceiveLocalNotificationOnApplicationActiveWithUserInfo:(NSDictionary *)userInfo {
+    NSLog(@"localNotification_ApplicationActiveWithUserInfo:%@",userInfo.description);
+}
+
+#pragma mark-MZRemoteNotificationDelegate
+- (void)mz_didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)token tokenString:(NSString *)tokenString {
+    NSLog(@"remoteNotification_deviceTokenString:%@",tokenString);
+}
+
+- (void)mz_didReceiveRemoteNotificationOnApplicationActiveWithUserInfo:(NSDictionary *)userInfo {
+    NSLog(@"remoteNotification_ApplicationActiveWithUserInfo:%@",userInfo.description);
+}
+
+- (void)mz_didReceiveRemoteNotificationOnApplicationBackgroundWithUserInfo:(NSDictionary *)userInfo {
+    NSLog(@"remoteNotification_ApplicationBackgroundWithUserInfo:%@",userInfo.description);
 }
 
 
@@ -41,7 +68,7 @@
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [[MZLocalNotification shareInstance] clearApplicationIconBadge];
 }
 
 

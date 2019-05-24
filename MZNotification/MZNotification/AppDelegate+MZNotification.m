@@ -15,11 +15,22 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         mz_swizzleSelector([self class], @selector(application:didReceiveLocalNotification:),@selector(mz_application:didReceiveLocalNotification:));
+        mz_swizzleSelector([self class], @selector(application:didRegisterForRemoteNotificationsWithDeviceToken:),@selector(mz_application:didRegisterForRemoteNotificationsWithDeviceToken:));
+        mz_swizzleSelector([self class], @selector(application:didReceiveRemoteNotification:fetchCompletionHandler:), @selector(mz_application:didReceiveRemoteNotification:fetchCompletionHandler:));
+        
     });
 }
 
 - (void)mz_application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-    [[MZNotification shareInstance] application:application didReceiveLocalNotification:notification];
+    [[MZLocalNotification shareInstance] application:application didReceiveLocalNotification:notification];
+}
+
+- (void)mz_application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    [[MZRemoteNotification shareInstance] application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+}
+
+- (void)mz_application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    [[MZRemoteNotification shareInstance] application:application didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
 }
 
 static inline void mz_swizzleSelector(Class theClass, SEL originalSelector, SEL swizzledSelector) {

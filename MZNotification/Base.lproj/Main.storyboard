@@ -20,7 +20,25 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9t0-zP-Qgh">
+                                <rect key="frame" x="37.5" y="194" width="339" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="7Fe-ma-hyQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="发送本地推送"/>
+                                <connections>
+                                    <action selector="pushLocalNotification:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3wG-wm-ofj"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="9t0-zP-Qgh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="37.5" id="MT4-cs-NL2"/>
+                            <constraint firstAttribute="trailing" secondItem="9t0-zP-Qgh" secondAttribute="trailing" constant="37.5" id="Z7O-Mm-yxl"/>
+                            <constraint firstItem="9t0-zP-Qgh" firstAttribute="top" secondItem="HR7-TF-jMs" secondAttribute="bottom" constant="150" id="fTC-Id-q9I"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
