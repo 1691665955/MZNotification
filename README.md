@@ -1,9 +1,9 @@
 # MZNotification
-##前言
+## 前言
 最近开发一个项目是关于门禁系统的，会有门口机呼叫app的功能。本项目运用了voip来进行推送并唤醒app，然后利用本地推送来进行弹框提醒，目前该项目也已基本完成。联想到本人之前也做过类似闹钟功能的项目也用到了本地推送，所以想到对本地推送和远程推送进行简单的封装，待下次使用的时候能够更方便一点。
 
-###本地推送
-####UILocalNotification（iOS8-iOS10）
+### 本地推送
+#### UILocalNotification（iOS8-iOS10）
 在iOS10之前我们是使用UILocalNotification来进行本地推送的，接下来我们来介绍下简单的流程。
 - 注册本地通知
 ```
@@ -63,7 +63,7 @@ if ([UIApplication sharedApplication].applicationState == UIApplicationStateActi
 }
 ```
 
-####UNUserNotificationCenter（iOS10之后）
+#### UNUserNotificationCenter（iOS10之后）
 在iOS10之后我们使用UNUserNotificationCenter来创建和管理本地通知，接下来我们同样介绍下简单的流程。
 - 注册本地通知
 ```
@@ -118,7 +118,7 @@ completionHandler();
 }
 ```
 
-###远程推送
+### 远程推送
 
 - 远程推送的注册和本地通知的基本一样，最后多加一个一行代码去请求deviceToken即可
 ```
@@ -133,7 +133,7 @@ completionHandler(UIBackgroundFetchResultNoData);
 }
 ```
 
-##针对本地通知和远程推送的功能进行简单的封装
+## 针对本地通知和远程推送的功能进行简单的封装
 - 本地通知
 ```
 @protocol MZLocalNotificationDelegate <NSObject>
