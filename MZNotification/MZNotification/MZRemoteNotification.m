@@ -93,9 +93,20 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     if (self.delegate && [self.delegate respondsToSelector:@selector(mz_didRegisterForRemoteNotificationsWithDeviceToken:tokenString:)]) {
-        NSString *deviceString = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
-        deviceString = [deviceString stringByReplacingOccurrencesOfString:@" " withString:@""];
-        [self.delegate mz_didRegisterForRemoteNotificationsWithDeviceToken:deviceToken tokenString:deviceString];
+        if (@available(iOS 13.0, *)) {
+            NSMutableString *deviceString = [NSMutableString string];
+            const char *bytes = deviceToken.bytes;
+            NSInteger count = deviceToken.length;
+            for (int i = 0; i < count; i++) {
+                [deviceString appendFormat:@"%02x", bytes[i]&0x000000FF];
+            }
+            [self.delegate mz_didRegisterForRemoteNotificationsWithDeviceToken:deviceToken tokenString:deviceString];
+        } else {
+            NSString *str = [NSString stringWithFormat:@"%@",deviceToken];
+            NSString *deviceString = [[[str stringByReplacingOccurrencesOfString:@"<" withString:@""]
+                                   stringByReplacingOccurrencesOfString:@">" withString:@""] stringByReplacingOccurrencesOfString:@" " withString:@""];
+            [self.delegate mz_didRegisterForRemoteNotificationsWithDeviceToken:deviceToken tokenString:deviceString];
+        }
     }
 }
 
